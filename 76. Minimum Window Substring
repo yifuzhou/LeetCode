@@ -1,0 +1,34 @@
+@zjh08177 
+//  main.cpp
+//  leetcode76
+//
+//  Created by Yifu Zhou on 2017/9/7.
+//  Copyright © 2017年 Yifu. All rights reserved.
+//
+
+#include <iostream>
+#include<vector>
+using namespace std;
+
+string minWindow(string s, string t) {
+    vector<int> map(128,0);
+    for(auto c: t) map[c]++;
+    int counter=t.size(), begin=0, end=0, d=INT_MAX, head=0;
+    while(end<s.size()){
+        if(map[s[end++]]-->0) counter--; //in t
+        while(counter==0){ //valid
+            if(end-begin<d)  d=end-(head=begin);
+            if(map[s[begin++]]++==0) counter++;  //make it invalid
+        }
+    }
+    return d==INT_MAX? "":s.substr(head, d);
+}
+
+int main(int argc, const char * argv[]) {
+    // insert code here...
+    std::cout << "Hello, World!\n";
+    
+    string st = minWindow("ADOBECODEBANC", "ABC");
+    std::cout << st << endl;
+    return 0;
+}
