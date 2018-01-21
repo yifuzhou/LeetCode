@@ -1,0 +1,41 @@
+class Solution {
+    public int[] pourWater(int[] heights, int V, int K) {
+        int pointer = K;
+        
+         for (int i = 0; i < V; i ++) {
+             boolean dropLeft = false;
+             pointer = K;
+             int water_pt = pointer;
+            heights[pointer] = heights[pointer] + 1;
+            while (pointer - 1 >= 0 && heights[pointer-1] <= (heights[water_pt] - 1)) {
+                while (pointer >= 1 && heights[pointer -1] == (heights[water_pt] - 1))
+                    pointer --;
+                if (pointer == 0 ||heights[pointer-1] > (heights[water_pt] - 1)) break;
+                else {
+                    heights[water_pt] --;
+                    heights[pointer - 1] ++;
+                    pointer --;
+                    water_pt = pointer;
+                    dropLeft = true;
+                }
+            }
+            if (!dropLeft) {
+                pointer = K;
+                
+                while (pointer + 1 < heights.length && heights[pointer + 1] <= (heights[water_pt] - 1)) {
+                while (pointer < heights.length -1 && heights[pointer + 1] == (heights[water_pt] - 1))
+                    pointer = pointer + 1;
+                if (pointer == heights.length - 1 || heights[pointer+1] > (heights[water_pt] - 1)) break;
+                else {
+                    heights[water_pt] = heights[water_pt] - 1;
+                    heights[pointer+1] = heights[pointer+1] + 1;
+                    pointer ++;
+                    water_pt = pointer;
+                }
+            }
+            }
+
+        }
+        return heights;
+    }
+}
