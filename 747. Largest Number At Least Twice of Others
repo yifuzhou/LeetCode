@@ -2,28 +2,25 @@ class Solution {
     public int dominantIndex(int[] nums) {
         if (nums.length == 1)
             return 0;
-        int maxIndex = 0;
-        int twiceIndex = 0;
-        //int biggestNum = 0;
-        if (nums.length ==2) {
-            maxIndex = nums[0] >= nums[1] ?0:1;
-            twiceIndex = nums[0] >= nums[1] ?1:0;
-        }
-        else {
+        int max = 0;
+        int secondMax = 0;
+        int index = 0;
+
             for (int i = 0; i<nums.length; i++) {
-            if (nums[i] >= nums[maxIndex]) {
-                twiceIndex = maxIndex;
-                maxIndex = i;
+            if (nums[i] > max) {
+                secondMax = max;
+                max = nums[i];
+                index = i;
             }
-            if (nums[i] > nums[twiceIndex] && nums[i] < nums[maxIndex])              
-                twiceIndex = i;      
+            else if (nums[i] > secondMax)              
+                secondMax = nums[i];      
         }
-        }
-        if (nums[maxIndex] >= nums[twiceIndex] * 2)
-            return maxIndex;
+        
+        if (max >= secondMax * 2)
+            return index;
         else
             return -1;
     
     }
 }
-    
+   
