@@ -1,0 +1,28 @@
+class MyCalendarTwo {
+
+    public MyCalendarTwo() {
+        
+    }
+    ArrayList<int[]> books = new ArrayList<>();
+
+    public boolean book(int start, int end) {
+        for (int i = 0; i < books.size(); i++) {
+            if (Math.max(books.get(i)[0], start) < Math.min(books.get(i)[1], end)) {
+                if (!tripleOverlap(Math.max(books.get(i)[0], start), Math.min(books.get(i)[1], end), i)) return false;
+            }
+        }
+        books.add(new int[]{start, end});
+        return true;
+    }
+    public boolean tripleOverlap(int s, int e, int n) {
+        for (int i = n + 1; i < books.size(); i++) 
+            if (Math.max(books.get(i)[0], s) < Math.min(books.get(i)[1], e)) return false;
+        return true;
+    }
+}
+
+/**
+ * Your MyCalendarTwo object will be instantiated and called as such:
+ * MyCalendarTwo obj = new MyCalendarTwo();
+ * boolean param_1 = obj.book(start,end);
+ */
