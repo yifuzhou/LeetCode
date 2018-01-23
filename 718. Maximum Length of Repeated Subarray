@@ -19,3 +19,24 @@ class Solution {
         return max;
     }
 }
+
+@Space saving solution!
+class Solution {
+     
+    
+    
+    public int findLength(int[] A, int[] B) {
+        if (A == null || B == null) return 0;
+        int m = A.length;
+        int n = B.length;
+        int[] dp = new int[n + 1];
+        int max = 0;
+        for(int i = 1; i <= m; i++) {
+            for(int j = n; j > 0; j--) {
+                dp[j] = A[i-1] == B[j-1] ? dp[j - 1] + 1 : 0;
+                max = Math.max(max, dp[j]);
+            }
+        }               
+        return max;
+    }  
+}
