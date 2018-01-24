@@ -1,0 +1,22 @@
+Like a sliding window
+
+class Solution {
+    public int numSubarrayProductLessThanK(int[] nums, int k) {
+        if (nums.length == 0) return 0;
+        int puduct = 1;
+        int p1 = 0;
+        int p2 = 0;
+        int counter = 0;
+        while (p1 < nums.length) {
+            puduct = puduct * nums[p1];
+            while (p2 <= p1 && puduct >= k) {
+                puduct /= nums[p2];
+                p2 ++;
+            }
+            counter += p1 - p2 + 1;
+            p1 ++;
+        }
+        return counter;
+    }
+    
+}
