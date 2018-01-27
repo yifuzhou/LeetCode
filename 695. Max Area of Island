@@ -1,0 +1,32 @@
+class Solution {
+    public int counter;
+    public int maxAreaOfIsland(int[][] grid) {
+        int row = grid.length;
+        int col = grid[0].length;
+        int max = 0;
+        
+        for (int i=0; i<row; i++) {
+            for (int j=0; j<col; j++) {
+                counter = 0;
+                if (grid[i][j] == 1) {
+                    neighborIsland(grid, i, j);
+                }
+                
+                max = Math.max(max, counter);
+            }
+        }
+     return max;   
+    }
+    
+    public void neighborIsland(int[][] grid, int row, int col) {
+        if (row<0||col<0||row>=grid.length||col>=grid[0].length||grid[row][col] != 1) return;
+        else {
+            grid[row][col] = 0;
+            counter ++;
+            neighborIsland(grid, row + 1, col);
+            neighborIsland(grid, row - 1, col);
+            neighborIsland(grid, row, col + 1);
+            neighborIsland(grid, row, col - 1);
+        }
+    }
+}
