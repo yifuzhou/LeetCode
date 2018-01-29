@@ -1,3 +1,7 @@
+2D array dp[][]: 
+只考虑当前的substring 的情况做最优化，例如dp[2][3], 只考虑string1中前两位和string2中前三位的比较得到最优解，往后的再一步步推理知道全部。
+https://www.youtube.com/watch?v=b6AGUjqIPsA
+
 class Solution {
        int minimumDeleteSum(String s1, String s2) {
         int m = s1.length(), n = s2.length();
