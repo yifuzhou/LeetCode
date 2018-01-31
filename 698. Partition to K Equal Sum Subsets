@@ -1,0 +1,19 @@
+class Solution {
+    private boolean dfs(int[] nums, int visited, int start_idx, int k, int curSum, int per){
+        if(k==0)return true;
+        if(curSum>per)return false;
+        if(curSum==per)return dfs(nums, visited, 0, k-1, 0, per);
+        for(int i=start_idx;i<nums.length;i++){
+            int mask=1<<i;
+            if((visited&mask)==0)
+                if(dfs(nums,visited|mask, i+1, k, curSum+nums[i],per))return true;
+        }
+        return false;
+    }
+    public boolean canPartitionKSubsets(int[] nums, int k) {
+        int sum=0;
+        for(int n:nums)sum+=n;
+        if(sum%k!=0)return false;
+        return dfs(nums,0, 0,k,0,sum/k);
+    }
+}
