@@ -1,3 +1,5 @@
+0/1背包问题：通过DP找到一些组合能达到一个你指定的特定的值。例如给你一个数组然后找是否存在set 使其数相加等于一个值。
+0/1背包问题：https://www.youtube.com/watch?v=8LusJS5-AGo&t=634s
 public class Solution {
     public boolean canPartition(int[] nums) {
         // check edge case
