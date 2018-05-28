@@ -1,0 +1,51 @@
+class Solution {
+    public boolean isMatch(String s, String p) {
+    if (s == null || p == null) return false;
+        boolean[][] dp = new boolean[s.length() + 1][p.length() + 1];
+        dp[0][0] = true;
+        for (int j = 1; j < p.length(); j ++) {
+            if (p.charAt(j) == '*' && dp[0][j - 1]) dp[0][j + 1] = true;
+        }
+        for (int i = 0; i < s.length(); i ++) {
+            for (int j = 0; j < p.length(); j ++) {
+                if (s.charAt(i) == p.charAt(j)) dp[i + 1][j + 1] = dp[i][j];
+                if (p.charAt(j) == '.') dp[i + 1][j + 1] = dp[i][j];
+                if (p.charAt(j) == '*') {
+                    if (p.charAt(j - 1) != '.' && p.charAt(j - 1) != s.charAt(i)) dp[i + 1][j + 1] = dp[i + 1][j - 1];
+                    else dp[i + 1][j + 1] = dp[i + 1][j] || dp[i][j + 1] || dp[i + 1][j - 1];
+                }
+            }
+        }
+        return dp[s.length()][p.length()];
+    }
+}
+
+
+class Solution {
+    public boolean isMatch(String s, String p) {
+        //典型的动态规划问题：从后往前遍历patter。当遇到星号时，string从后往前搜索。
+        //其他的string从前往后
+        boolean [] dp=new boolean[s.length()+1];
+        //最后一个置为true，因为该位置都为空
+        dp[s.length()]=true;
+        for(int i=p.length()-1;i>=0;i--){
+            if(p.charAt(i)=='*'){
+                //从后往前搜索
+                for(int j=s.length()-1;j>=0;j--){
+                    //如果j+1为true，j才能判断保证为true
+                    dp[j]=dp[j]||(dp[j+1]&&(s.charAt(j)==p.charAt(i-1)||p.charAt(i-1)=='.'));
+                }
+                //因为*和前面一个字母一起运算
+                i--;
+            }else{
+                //从前往后搜索
+                for(int j=0;j<s.length();j++){
+                    dp[j]=dp[j+1]&&(p.charAt(i)==s.charAt(j)||p.charAt(i)=='.');
+                }
+                //置为false,每次完成一次匹配
+                dp[s.length()]=false;
+            }
+        }
+        return dp[0];
+    }
+}
