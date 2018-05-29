@@ -1,0 +1,18 @@
+class Solution {
+     public List<String> generateParenthesis(int n) {
+        List<String> res = new ArrayList<String>();
+         if (n == 0) return res;
+        helper(res, "", n, n);
+        return res;
+    }
+    
+    public void helper(List<String> list, String s, int left, int right){
+        if (left > right) return;
+        if (left == 0 && right == 0) {
+            list.add(s);
+            return;
+        }
+        if (left > 0) helper(list, s + "(", left - 1, right);
+        if (right > 0) helper(list, s + ")", left, right - 1);
+}
+}
