@@ -3,13 +3,17 @@ public List<String> letterCombinations(String digits) {
 		LinkedList<String> ans = new LinkedList<String>();
 		if(digits.isEmpty()) return ans;
 		String[] mapping = new String[] {"0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
-		ans.add("");
-		for(int i =0; i<digits.length();i++){
+        int a = Character.getNumericValue(digits.charAt(0));
+        for(char s : mapping[a].toCharArray())
+            ans.add("" + s);
+    for(int i = 1; i < digits.length(); i ++){
 			int x = Character.getNumericValue(digits.charAt(i));
-			while(ans.peek().length()==i){
+        int n = ans.size();
+			while(n>0){
 				String t = ans.remove();
 				for(char s : mapping[x].toCharArray())
 					ans.add(t+s);
+                n --;
 			}
 		}
 		return ans;
