@@ -29,3 +29,32 @@ class Solution {
         return l2;
     }
 }
+
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        if (lists == null || lists.length == 0) return null;
+        PriorityQueue<ListNode> queue = new PriorityQueue<>(lists.length, (l1,l2) -> l1.val - l2.val);
+        ListNode dummy = new ListNode(0);
+        ListNode cur = dummy;
+        
+        for (ListNode list : lists) {
+            if (list != null) queue.add(list);
+        }
+        
+        while (!queue.isEmpty()) {
+            cur.next = queue.poll();
+            cur = cur.next;
+            if (cur.next != null) queue.add(cur.next);
+        }
+        return dummy.next;
+    }
+}
