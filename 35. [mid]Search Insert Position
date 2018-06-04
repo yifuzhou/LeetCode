@@ -1,0 +1,14 @@
+class Solution {
+        public int searchInsert(int[] A, int target) {
+        int start = 0, end = A.length-1;
+        while(start + 1 < end){
+            int mid = (end - start)/2 + start;
+            if(A[mid] == target) return mid;
+            else if(A[mid] > target) end = mid-1;
+            else start = mid+1;
+        }
+        if (target <= A[start]) return start;
+            else if (target <= A[end]) return end;
+            else return end + 1;
+    }
+}
