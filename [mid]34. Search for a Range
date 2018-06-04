@@ -1,3 +1,5 @@
+分析：二分法最后start end 两个pointers 要么指向相连的两个数，要么指向同一个数。但规律是都是最接近target的。然后就可以分析
+
 class Solution {
     public int[] searchRange(int[] nums, int target) {
         if (nums == null || nums.length == 0) return new int[]{-1, -1};
