@@ -1,14 +1,12 @@
-class Solution {
+public class Solution {
     public double myPow(double x, int n) {
-        long m = n;
-        if(m < 0) m *= -1;
-        double res = helper(x,m);
-        return n<0?1/res:res;
-    }
-    
-    public double helper(double x, long n){
-        if(n == 0 || x == 1) return 1;
-        double temp = n % 2 == 0? helper(x,n/2) : helper(x,(n-1)/2);
-        return n % 2 == 0 ? temp * temp : temp * temp * x;
+        if(n == 0)
+            return 1;
+        if(n<0){
+            n = -n;
+            if (n > 0)
+            x = 1/x;}
+        return (n%2 == 0) ? myPow(x*x, n/2) : x*myPow(x*x, n/2);
     }
 }
+
