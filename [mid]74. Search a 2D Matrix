@@ -1,0 +1,28 @@
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        if (matrix == null || matrix.length == 0 || matrix[0] == null || matrix[0].length == 0) return false;
+        int s = 0;
+        int e = matrix.length - 1;
+        while (s + 1 < e) {
+            int mid = (e - s) / 2 + s;
+            if (matrix[mid][0] == target) return true;
+            else if (matrix[mid][0] < target) s = mid;
+            else 
+                e = mid;
+        }
+        if (matrix[s][0] == target || matrix[e][0] == target) return true;
+        int row = s;
+        s = 0;
+        e = matrix[row].length - 1;
+        while (s + 1 < e) {
+            int mid = (e - s) / 2 + s;
+            if (matrix[row][mid] == target) return true;
+            else if (matrix[row][mid] < target) s = mid;
+            else
+                e = mid;
+        }
+        if (matrix[row][s] == target || matrix[row][e] == target) return true;
+        else
+            return false;
+    }
+}
